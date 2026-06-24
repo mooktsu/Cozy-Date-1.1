@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cozy Date v1.1</title>
-    <!-- Google Fonts -->
+    <title>Cozy Date v1.2 - Minimal & Clean</title>
+    <!-- Google Fonts: ใช้ฟอนต์ที่มีความเรียบ คลีน และอ่านง่าย -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500&family=Sriracha&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-color: #FDFBF7;
-            --card-bg: #FFFFFF;
-            --text-main: #4A3E3D;
-            --text-sub: #8C7A78;
-            --primary: #D98880;
-            --primary-hover: #C1736C;
-            --accent: #E6B0AA;
-            --shadow: rgba(140, 122, 120, 0.1);
+            --bg-color: #FAF9F5;      /* พื้นหลังสีครีมอุ่นแบบมินิมอล */
+            --card-bg: #FFFFFF;       /* การ์ดสีขาวสะอาด */
+            --text-main: #2C2A29;     /* ตัวอักษรสีเทาเข้มเกือบดำ (ละมุนกว่าสีดำสนิท) */
+            --text-sub: #7A7571;      /* ตัวอักษรรองสีเทาหม่น */
+            --accent: #7F9F7F;        /* สีโทนธรรมชาติ (Sage Green) ให้ความรู้สึกผ่อนคลาย ปลอดภัย */
+            --accent-light: #EAEFEA;  /* สีเขียวอ่อนสำหรับไฮไลต์/Badge */
+            --border: #E6E4DE;        /* เส้นขอบบางๆ สะอาดตา */
+            --shadow: rgba(44, 42, 41, 0.03); /* เงาบางเบามากๆ */
         }
 
         * {
@@ -37,33 +37,33 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-            background-image: radial-gradient(var(--accent) 0.5px, transparent 0.5px), radial-gradient(var(--accent) 0.5px, var(--bg-color) 0.5px);
-            background-size: 20px 20px;
-            background-position: 0 0, 10px 10px;
+            padding: 24px;
         }
 
         .container {
             width: 100%;
-            max-width: 500px;
+            max-width: 460px;
             text-align: center;
         }
 
+        header {
+            margin-bottom: 35px;
+        }
+
         header h1 {
-            font-family: 'Sriracha', cursive;
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 5px;
-            text-shadow: 1px 1px 2px var(--shadow);
+            font-size: 2rem;
+            font-weight: 500;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
         }
 
         header p {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: var(--text-sub);
-            margin-bottom: 30px;
+            font-weight: 300;
         }
 
-        /* Screen States */
+        /* Screen Wrapper Management */
         .screen {
             display: none;
         }
@@ -71,34 +71,33 @@
             display: block;
         }
 
-        /* Menu Grid */
+        /* Menu Elements */
         .menu-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 15px;
-            margin-bottom: 20px;
+            gap: 12px;
+            margin-bottom: 24px;
         }
 
         .menu-card {
             background: var(--card-bg);
-            border: 2px solid var(--accent);
-            border-radius: 16px;
-            padding: 22px 20px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 6px var(--shadow);
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 2px 4px var(--shadow);
             text-align: left;
         }
 
         .menu-card:hover, .menu-card:active {
-            transform: translateY(-2px);
-            border-color: var(--primary);
-            box-shadow: 0 6px 12px var(--shadow);
+            border-color: var(--accent);
+            background-color: rgba(250, 249, 245, 0.5);
         }
 
         .menu-card h3 {
-            font-size: 1.3rem;
-            color: var(--primary);
+            font-size: 1.1rem;
+            font-weight: 500;
             margin-bottom: 6px;
             display: flex;
             align-items: center;
@@ -106,20 +105,20 @@
         }
 
         .menu-card p {
-            font-size: 0.88rem;
+            font-size: 0.85rem;
             color: var(--text-sub);
             font-weight: 300;
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
-        /* Game Screen Box */
-        .game-box {
+        /* Game UI */
+        .game-screen-box {
             background: var(--card-bg);
-            border-radius: 24px;
-            padding: 35px 25px;
-            box-shadow: 0 10px 25px var(--shadow);
-            border: 1px solid rgba(230, 176, 170, 0.3);
-            min-height: 400px;
+            border-radius: 16px;
+            padding: 40px 24px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 12px var(--shadow);
+            min-height: 380px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -127,19 +126,21 @@
 
         .badge {
             display: inline-block;
-            background: #FAEDCD;
-            color: #D4A373;
-            padding: 4px 14px;
-            border-radius: 20px;
+            background: var(--accent-light);
+            color: var(--accent);
+            padding: 4px 12px;
+            border-radius: 6px;
             font-size: 0.8rem;
-            font-weight: 500;
-            margin-bottom: 20px;
+            font-weight: 400;
+            margin-bottom: 24px;
             align-self: center;
+            border: 1px solid rgba(127, 159, 127, 0.15);
         }
 
         .question-box {
-            font-size: 1.35rem;
-            line-height: 1.6;
+            font-size: 1.25rem;
+            font-weight: 400;
+            line-height: 1.625;
             color: var(--text-main);
             margin: auto 0;
             word-break: break-word;
@@ -147,67 +148,77 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 0 10px;
         }
 
         .counter {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-sub);
-            margin-top: 15px;
+            margin-top: 20px;
             font-weight: 300;
+            letter-spacing: 0.5px;
         }
 
-        /* Controls */
+        /* Action Buttons */
         .control-btns {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 25px;
+            gap: 10px;
+            margin-top: 24px;
         }
 
         button {
-            padding: 12px 20px;
-            border-radius: 12px;
-            border: none;
-            font-size: 1rem;
-            font-weight: 500;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid transparent;
+            font-size: 0.95rem;
+            font-weight: 400;
             cursor: pointer;
-            transition: all 0.1s ease;
+            transition: all 0.15s ease;
         }
 
         .btn-primary {
-            background-color: var(--primary);
+            background-color: var(--text-main);
             color: white;
             grid-column: span 2;
-            font-size: 1.1rem;
-            box-shadow: 0 4px 10px rgba(217, 136, 128, 0.3);
         }
 
         .btn-primary:hover, .btn-primary:active {
-            background-color: var(--primary-hover);
+            background-color: #403E3C;
         }
 
         .btn-secondary {
-            background-color: #F0EAE1;
+            background-color: transparent;
+            border-color: var(--border);
             color: var(--text-main);
+        }
+
+        .btn-secondary:hover, .btn-secondary:active {
+            background-color: #F5F4EE;
+            border-color: var(--text-sub);
         }
 
         .btn-back {
             background-color: transparent;
             color: var(--text-sub);
-            text-decoration: underline;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             grid-column: span 2;
-            margin-top: 10px;
-            padding: 5px;
+            margin-top: 12px;
+            padding: 4px;
+            border: none;
+        }
+        
+        .btn-back:hover {
+            color: var(--text-main);
         }
 
-        /* Animations */
+        /* Smooth Transitions */
         .fade-in {
-            animation: fadeIn 0.3s ease forwards;
+            animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
+            from { opacity: 0; transform: translateY(4px); }
             to { opacity: 1; transform: translateY(0); }
         }
     </style>
@@ -215,57 +226,92 @@
 <body>
 
     <div class="container">
-        <header>
-            <h1>Cozy Date ☕</h1>
-            <p>v1.1 Extended • ขยับความใกล้ชิดผ่านบทสนทนาฮีลใจ</p>
-        </header>
-
-        <!-- STEP 1: หน้าแรกสุด เลือกประเภทเกมหลัก -->
-        <div id="step1-screen" class="screen active fade-in">
+        
+        <!-- STEP 1: หน้าแรกสุดเลือกประเภทเกมหลัก (Main Menu) -->
+        <div id="main-menu-screen" class="screen active fade-in">
+            <header>
+                <h1>Cozy Talk</h1>
+                <p>เลือกรูปแบบการสนทนาสำหรับเดทของคุณ</p>
+            </header>
             <div class="menu-grid">
-                <div class="menu-card" onclick="goToStep2('deeptalk')">
-                    <h3>💬 Deep Talk Game</h3>
-                    <p>บทสนทนาเจาะลึก ทบทวนความคิด และแลกเปลี่ยนตัวตนในแง่มุมต่างๆ</p>
+                <div class="menu-card" onclick="navigateToStage('deep')">
+                    <h3>Deep Talk</h3>
+                    <p>คำถามเปิดใจ แลกเปลี่ยนมุมมอง ค้นหาทัศนคติลึกๆ เพื่อสร้างความเข้าใจร่วมกัน</p>
                 </div>
-                <div class="menu-card" onclick="goToStep2('wouldyourather')">
-                    <h3>🤔 Would You Rather?</h3>
-                    <p>คำถามวัดใจเลือกข้างสุดตลกและท้าทายความคิด มีทั้งโหมดขำๆ และโหมดคิดหนัก</p>
+                <div class="menu-card" onclick="navigateToStage('would')">
+                    <h3>Would You Rather?</h3>
+                    <p>สถานการณ์บังคับเลือก 2 ทาง เพื่อสะท้อนไลฟ์สไตล์ ไหวพริบ และอารมณ์ขัน</p>
                 </div>
             </div>
         </div>
 
-        <!-- STEP 2: หน้าเลือก Dating Stage / Sub-Category -->
-        <div id="step2-screen" class="screen fade-in">
-            <!-- จะแสดงปุ่มตามประเภทที่เลือกจาก Step 1 (Render ผ่าน JavaScript) -->
-            <div id="stage-options" class="menu-grid"></div>
-            <button class="btn-back" onclick="backToStep1()">◀ ย้อนกลับไปหน้าแรก</button>
+        <!-- STEP 2: หน้าเลือก Relationship Stage -->
+        <div id="stage-select-screen" class="screen fade-in">
+            <header>
+                <h1 id="stage-title">Select Stage</h1>
+                <p>เลือกระดับความลึกที่เหมาะกับมู้ดหรือระดับความสัมพันธ์ในปัจจุบัน</p>
+            </header>
+            
+            <!-- กลุ่มย่อยสำหรับโหมด Deep Talk -->
+            <div id="deep-stages" class="menu-grid" style="display:none;">
+                <div class="menu-card" onclick="startGame('deep1')">
+                    <h3>Level 1: Ice Breaking</h3>
+                    <p>เริ่มทำความรู้จัก สะท้อนไลฟ์สไตล์ มุมมอง และความสุขเรียบง่าย คุยสบายไม่กดดัน</p>
+                </div>
+                <div class="menu-card" onclick="startGame('deep2')">
+                    <h3>Level 2: Core Values</h3>
+                    <p>เจาะลึกความเชื่อ การเติบโตเป็นผู้ใหญ่ และกระบวนการทางความคิด</p>
+                </div>
+                <div class="menu-card" onclick="startGame('deep3')">
+                    <h3>Level 3: Vulnerability</h3>
+                    <p>พื้นที่ปลอดภัยเปิดกล่องความรู้สึก จุดอ่อน บาดแผล และความกังวลในชีวิต</p>
+                </div>
+                <div class="menu-card" onclick="startGame('deep4')">
+                    <h3>Level 4: Us & Future</h3>
+                    <p>เช็คความเข้ากัน แผนอนาคตคู่ชีวิต และข้อตกลงในการอยู่ร่วมกัน</p>
+                </div>
+            </div>
+
+            <!-- กลุ่มย่อยสำหรับโหมด Would You Rather -->
+            <div id="would-stages" class="menu-grid" style="display:none;">
+                <div class="menu-card" onclick="startGame('would1')">
+                    <h3>Casual & Fun</h3>
+                    <p>หมวดสไตล์ชีวิต ขำๆ ตลกหลุดโลก เอาไว้โยนคำถามแกล้งกันคลายเครียด</p>
+                </div>
+                <div class="menu-card" onclick="startGame('would2')">
+                    <h3>Deep & Tricky</h3>
+                    <p>สถานการณ์บังคับเลือกสุดหิน วัดมุมมองศีลธรรม ทัศนคติ และหลักการดำเนินชีวิต</p>
+                </div>
+            </div>
+
+            <button class="btn-back" onclick="backToMainMenu()">ย้อนกลับไปหน้าแรก</button>
         </div>
 
-        <!-- STEP 3: หน้าจอสำหรับเล่นเกม -->
+        <!-- STEP 3: หน้าจอสำหรับเล่นเกมจริง (Gameplay) -->
         <div id="game-screen" class="screen fade-in">
-            <div class="game-box">
+            <div class="game-screen-box">
                 <div id="mood-badge" class="badge">Mode</div>
                 <div id="question-text" class="question-box">คำถามกำลังโหลด...</div>
                 
                 <div>
                     <div id="question-counter" class="counter">ข้อที่ 0/0</div>
                     <div class="control-btns">
-                        <button class="btn-primary" onclick="nextQuestion()">สุ่มคำถามถัดไป ✨</button>
-                        <button class="btn-secondary" onclick="skipQuestion()">ข้ามข้อนี้ ⏭️</button>
-                        <button class="btn-secondary" onclick="resetCurrentCategory()">เริ่มหมวดนี้ใหม่ 🔄</button>
-                        <button class="btn-back" onclick="backToStep2()">◀ เปลี่ยนระดับ/Stage</button>
+                        <button class="btn-primary" onclick="nextQuestion()">คำถามถัดไป</button>
+                        <button class="btn-secondary" onclick="skipQuestion()">ข้ามข้อนี้</button>
+                        <button class="btn-secondary" onclick="resetCurrentCategory()">เริ่มใหม่</button>
+                        <button class="btn-back" onclick="backToStageSelect()">ย้อนกลับไปหน้าเลือกสเตจ</button>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 
     <script>
-        // คลังคำถาม Cozy Date v1.1
+        // MASTER DATA (คลังคำถาม 250 ข้อเต็มพิกัดคงเดิม)
         const questionBank = {
             deep1: {
-                title: "🧊 Deep Talk - Level 1",
-                desc: "Ice Breaking & Perspective: เหมาะสำหรับเดทแรกๆ หรือช่วงเริ่มคุย คุยสบายๆ แลกเปลี่ยนทัศนคติทั่วไป",
+                title: "Deep Talk • Level 1",
                 questions: [
                     "ถ้าสามารถย้อนเวลากลับไปบอกตัวเองเมื่อ 5 ปีที่แล้วได้เรื่องหนึ่ง อยากบอกอะไร?",
                     "อะไรคือความสำเร็จเล็กๆ ในสัปดาห์นี้ที่ทำให้คุณภูมิใจในตัวเอง?",
@@ -292,7 +338,7 @@
                     "โพสต์ล่าสุดในโซเชียลมีเดียของคุณคือรูปหรือข้อความเกี่ยวกับอะไร?",
                     "มีเทรนด์หรือกระแสอะไรในสังคมตอนนี้ที่คุณรู้สึกว่า \"ไม่เก็ต\" หรือไม่ค่อยอินบ้างไหม?",
                     "กลิ่นแบบไหน (เช่น กลิ่นฝน, กลิ่นหนังสือเก่า, กลิ่นกาแฟ) ที่ทำให้คุณรู้สึกอุ่นใจอย่างบอกไม่ถูก?",
-                    "ถ้าคุณสามารถจัดปาร์ตี้มื้อค่ำและเชิญใครก็ได้ในโลก (ทั้งที่มีชีวิตอยู่หรือเสียชีวิตไปแล้ว) 3 คน คุณจะเชิญใคร?",
+                    "ถ้าคุณสามารถจัดปาร์ตี้มื้อค่ำและเชิญใครก็ได้ในโลก 3 คน คุณจะเชิญใคร?",
                     "อะไรคือสิ่งที่คุณมักจะทำเป็นสิ่งแรกทันทีหลังจากตื่นนอน?",
                     "คุณคิดว่าตัวเองเป็นคน \"ใช้สมอง (เหตุผล)\" หรือ \"ใช้หัวใจ (ความรู้สึก)\" นำทางชีวิตมากกว่ากัน?",
                     "ของชิ้นไหนในห้องนอนที่คุณรักและหวงที่สุดแบบที่ใครก็ห้ามแตะ?",
@@ -320,8 +366,7 @@
                 ]
             },
             deep2: {
-                title: "☕ Deep Talk - Level 2",
-                desc: "Core Values & Growth: เริ่มพัฒนาความคุ้นเคย เจาะลึกเรื่องความเชื่อ บาดแผลในอดีต และสิ่งที่ทำให้เติบโต",
+                title: "Deep Talk • Level 2",
                 questions: [
                     "บาดแผลหรือความล้มเหลวไหนในอดีต ที่ทำให้คุณเติบโตมาเป็นคนที่ดีขึ้นในวันนี้?",
                     "อะไรคือ \"ขีดจำกัด (Boundary)\" ในความสัมพันธ์ที่คุณจะไม่ยอมให้ใครข้ามเด็ดขาด?",
@@ -369,15 +414,14 @@
                     "คุณคิดว่าการมีความสุข จำเป็นต้องประสบความสำเร็จก่อนไหม?",
                     "อะไรคือสิ่งที่ทำให้คุณรู้สึกอบอุ่นใจและปลอดภัยที่สุดหลังจากผ่านวันแย่ๆ มา?",
                     "คุณเคยสงสัยในศักยภาพของตัวเองจนเกือบจะล้มเลิกอะไรบางอย่างไปไหม?",
-                    "บรรทัดฐานของสังคมเรื่องไหน (เช่น ต้องแต่งงานก่อน 30, ต้องมีบ้านมีรถ) ที่คุณรู้สึกไม่เห็นด้วยที่สุด?",
+                    "บรรทัดฐานของสังคมเรื่องไหน ที่คุณรู้สึกไม่เห็นด้วยที่สุด?",
                     "คุณอยากให้คนอื่นมองคุณว่าเป็นคน \"เก่ง\" หรือเป็นคน \"จิตใจดี\"?",
                     "อะไรคือความท้าทายที่ใหญ่ที่สุดที่คุณคิดว่าจะต้องเจอในอีก 2-3 ปีข้างหน้า?",
-                    "ถ้าชีวิตคือการเดินทาง ตอนนี้คุณคิดว่าตัวเองเดินทางมาถึงช่วงไหนแล้ว (เริ่มต้น, ครึ่งทาง, หรือใกล้เป้าหมาย)?"
+                    "ถ้าชีวิตคือการเดินทาง ตอนนี้คุณคิดว่าตัวเองเดินทางมาถึงช่วงไหนแล้ว?"
                 ]
             },
             deep3: {
-                title: "🌙 Deep Talk - Level 3",
-                desc: "Vulnerability & Soft Spots: พื้นที่ปลอดภัยขั้นสุด เปิดความในใจ คุยเรื่องความอ่อนแอ ความกลัว และจุดที่เปราะบางที่สุด",
+                title: "Deep Talk • Level 3",
                 questions: [
                     "เรื่องอะไรที่สามารถทำให้คุณร้องไห้ได้ง่ายที่สุดในตอนนี้?",
                     "มีเรื่องอะไรในอดีตที่คุณยังรู้สึกผิดและยังไม่สามารถให้อภัยตัวเองได้ร้อยเปอร์เซ็นต์ไหม?",
@@ -394,7 +438,7 @@
                     "ครั้งสุดท้ายที่คุณร้องไห้แบบปล่อยโฮออกมาคนเดียวคือเมื่อไหร่ และเรื่องอะไร?",
                     "มีใครบางคนที่คุณคิดถึงมากๆ แต่ไม่สามารถทักท่วงหรือกลับไปคุยได้อีกแล้วไหม?",
                     "คำพูดไหนของพ่อหรือแม่ที่เคยทำร้ายจิตใจคุณลึกที่สุดโดยที่พวกเขาอาจจะไม่ตั้งใจ?",
-                    "คุณคิดว่าพฤติกรรมอะไรของตัวเองที่เป็นการทำร้ายตัวเอง (Self-Sabotage) ทางอ้อม?",
+                    "คุณคิดว่าพฤติกรรมอะไรของตนเองที่เป็นการทำร้ายตัวเอง (Self-Sabotage) ทางอ้อม?",
                     "อะไรคือสิ่งที่ทำให้คุณรู้สึก \"ใจสลาย\" ได้ง่ายที่สุดในเรื่องของความสัมพันธ์?",
                     "คุณเคยรู้สึกเหนื่อยกับการต้องทำเป็น \"คนเข้มแข็ง\" ตลอดเวลาต่อหน้าคนอื่นไหม?",
                     "ถ้าคุณสามารถลบความทรงจำแย่ๆ ออกไปจากสมองได้ 1 เรื่อง คุณจะลบเรื่องอะไร?",
@@ -415,7 +459,7 @@
                     "มีเรื่องอะไรที่คุณอยากขอโทษตัวเองมากที่สุดในขวบปีที่ผ่านมา?",
                     "คุณคิดว่าคุณเป็นคนที่เข้าใจยากไหม? และมีมุมไหนที่คุณคิดว่าไม่มีใครเข้าใจเลยจริงๆ?",
                     "อะไรคือสิ่งที่ทำให้คุณรู้สึกว่าตัวเองไม่มีค่า และคุณจัดการกับความรู้สึกนั้นอย่างไร?",
-                    "คุณเคยยอมทนอยู่ในสถานการณ์หรือความสัมพันธ์ที่เป็นพิษ (Toxic) เพียงเพราะกลัวการเปลี่ยนแปลงไหม?",
+                    "คุณเคยยอมทนอยู่ในสถานการณ์หรือความสัมพันธ์ที่เป็นพิษ เพียงเพราะกลัวการเปลี่ยนแปลงไหม?",
                     "คำวิจารณ์จากคนแปลกหน้าบนโลกออนไลน์เคยส่งผลต่อจิตใจของคุณมากน้อยแค่ไหน?",
                     "อะไรคือความเจ็บปวดทางใจที่ฝังลึกที่สุดแต่คุณแทบจะไม่เคยเล่าให้ใครฟังเลย?",
                     "คุณรู้สึกปลอดภัยและเป็นตัวเองร้อยเปอร์เซ็นต์เมื่ออยู่กับใครในตอนนี้?",
@@ -424,7 +468,7 @@
                     "อะไรคือสิ่งที่คุณรู้สึกว่าตัวเองพยายามทำดีที่สุดแล้วแต่มันยังไม่ดีพอในสายตาคนอื่น?",
                     "คุณเคยมีช่วงเวลาที่ไม่อยากคุยกับใครเลย ไม่อยากจับมือถือ หายไปดื้อๆ บ้างไหม?",
                     "สำหรับคุณ ความผิดพลาดเรื่องไหนในอดีตที่ถ้าย้อนเวลากลับไปได้ จะไม่มีวันทำเด็ดขาด?",
-                    "คุณกลัวการถูกปฏิเสธ (Rejection) มากแค่ไหน และมันขัดขวางไม่ให้คุณลงมือทำอะไรบ้างไหม?",
+                    "คุณกลัวการถูกปฏิเสธ มากแค่ไหน และมันขัดขวางไม่ให้คุณลงมือทำอะไรบ้างไหม?",
                     "มีความเชื่อใจเรื่องไหนที่คุณเคยให้ใครไปเต็มร้อยแล้วถูกทำลายลงไม่มีชิ้นดีไหม?",
                     "อะไรคือสิ่งที่ทำให้คุณรู้สึกโดดเดี่ยวที่สุด แม้ว่าจะอยู่ในห้องที่มีคนเต็มไปหมด?",
                     "คุณอยากบอกอะไรกับคนที่เคยทำให้คุณเจ็บปวดที่สุดในชีวิต ถ้าเขานั่งอยู่ตรงหน้าตอนนี้?",
@@ -432,8 +476,7 @@
                 ]
             },
             deep4: {
-                title: "🕯️ Deep Talk - Level 4",
-                desc: "Us & Future: สเตจคนรู้ใจ / แฟน / คู่ชีวิต เช็คความเข้ากัน คุยเรื่องแต่งงาน อนาคต และความสัมพันธ์สองเรา",
+                title: "Deep Talk • Level 4",
                 questions: [
                     "คุณเห็นภาพความสัมพันธ์ของเราในอีก 1 ปีข้างหน้าเป็นอย่างไรบ้าง?",
                     "อะไรในตัวฉันที่ทำให้คุณรู้สึกสบายใจ หรือรู้สึกปลอดภัยเมื่อได้อยู่ใกล้?",
@@ -441,7 +484,7 @@
                     "คำว่า \"คู่ชีวิต\" สำหรับคุณ ต้องมีคุณสมบัติอะไรที่ขาดไม่ได้เลย?",
                     "ถ้าวันหนึ่งเราทะเลาะกันแรงมากๆ คุณอยากให้เราใช้วิธีไหนในการตั้งสติและหันหน้ามาคุยกัน?",
                     "การซัพพอร์ตแบบไหนจากฉันที่คุณรู้สึกว่ามันมีพลังต่อใจคุณมากที่สุด?",
-                    "อะไรคือ Love Language (ภาษาหลักในการแสดงความรัก) ที่คุณอยากได้รับจากฉันมากที่สุด?",
+                    "อะไรคือ Love Language ที่คุณอยากได้รับจากฉันมากที่สุด?",
                     "คุณคิดว่าความสัมพันธ์ที่ดี ควรจับมือกันเดินไปข้างหน้า หรือเดินเคียงข้างกันไปเรื่อยๆ?",
                     "เรื่องอะไรเกี่ยวกับฉันที่คุณรู้สึกประทับใจที่สุดตั้งแต่ครั้งแรกที่เจอกันจนถึงวันนี้?",
                     "ภาพการใช้ชีวิตวัยเกษียณในฝันของคุณมีหน้าตาเป็นแบบไหน? และมีฉันอยู่ในนั้นไหม?",
@@ -449,7 +492,7 @@
                     "สำหรับคุณ \"ความซื่อสัตย์\" ในความสัมพันธ์มีขอบเขตแค่ไหน? เรื่องไหนที่ถือว่านอกใจ?",
                     "มีเรื่องอะไรเกี่ยวกับตัวคุณที่คุณยังไม่เคยบอกฉันเพราะกลัวฉันจะรับไม่ได้ไหม?",
                     "คุณคิดว่าการแบ่งเบาภาระค่าใช้จ่ายและการเงินในชีวิตคู่ควรเป็นรูปแบบไหนถึงจะแฟร์?",
-                    "พื้นที่ส่วนตัว (Personal Space) มีความสำคัญกับคุณมากแค่ไหนเมื่อเราคบกัน?",
+                    "พื้นที่ส่วนตัว มีความสำคัญกับคุณมากแค่ไหนเมื่อเราคบกัน?",
                     "ถ้าฉันมีวันที่น่าเบื่อ ไม่น่ารัก หรือหมดพลัง คุณจะใช้วิธีไหนในการเยียวยาหรือรับมือกับฉัน?",
                     "คุณคิดว่าเราสองคนเหมือนกันตรงไหน และต่างกันตรงไหนมากที่สุด? แล้วความต่างนั้นเป็นปัญหาไหม?",
                     "อะไรคือสิ่งที่ฉันเคยทำแล้วทำให้คุณรู้สึกใจฟูหรือมีความสุขมากๆ โดยที่ฉันอาจไม่รู้ตัว?",
@@ -457,27 +500,27 @@
                     "ในมุมมองของคุณ การมีลูกจำเป็นสำหรับชีวิตคู่ที่สมบูรณ์แบบไหม?",
                     "ถ้าครอบครัวหรือเพื่อนสนิทของเราไม่ปลื้มอีกฝ่าย คุณจะเลือกจัดการกับสถานการณ์นั้นอย่างไร?",
                     "คุณคิดว่าข้อเสียที่ใหญ่ที่สุดของฉันคืออะไร และคุณพร้อมที่จะยอมรับและอยู่กับมันได้ไหม?",
-                    "อะไรคือเดทในฝัน (Dream Date) ที่คุณอยากไปเที่ยวหรือทำร่วมกับฉันสักครั้ง?",
-                    "คุณรู้สึกอย่างไรเวลาที่เราเงียบใส่กัน? มันคือความอึดอัดหรือความสบายใจที่ไม่ต้องพูดอะไรก็เข้าใจ?",
+                    "อะไรคือเดทในฝัน ที่คุณอยากไปเที่ยวหรือทำร่วมกับฉันสักครั้ง?",
+                    "คุณรู้สึกอย่างไรเวลาที่เราเงียบใส่กัน? มันคือความอึดอัดหรือความสบายใจ?",
                     "คืนแรกที่เราเจอกัน หรือเดทแรกของเรา คุณรู้สึกอย่างไรกับฉันในแวบแรกที่เห็น?",
                     "คุณคิดว่าคู่ของเราควรคุยเรื่องเซ็กส์และความต้องการอย่างเปิดเผยมากน้อยแค่ไหน?",
                     "อะไรคือเป้าหมายส่วนตัวของคุณในปีนี้ที่คุณอยากให้ฉันช่วยสนับสนุนหรืออยู่เคียงข้าง?",
                     "คุณคิดว่าการแต่งงานและการมีทะเบียนสมรสมีความสำคัญกับคุณมากน้อยแค่ไหน?",
-                    "ถ้าวันหนึ่งฉันต้องย้ายไปทำงานต่างประเทศหรือต่างจังหวัดไกลๆ คุณยินดีที่จะย้ายตามไปหรือเลือก Long-Distance?",
+                    "ถ้าวันหนึ่งฉันต้องย้ายไปทำงานต่างประเทศไกลๆ คุณยินดีที่จะย้ายตามไปหรือเลือก Long-Distance?",
                     "อะไรคือสิ่งที่คุณรู้สึกว่า ตั้งแต่คบกับฉันมา มันทำให้คุณเปลี่ยนไปในทางที่ดีขึ้น?",
                     "คุณคิดว่าการงอนหรือการประชดประชันส่งผลเสียต่อความสัมพันธ์ของเราอย่างไร และเราจะแก้ยังไง?",
                     "มีความลับหรือเรื่องน่าอายอะไรในอดีตของคุณที่คุณพร้อมจะเปิดเผยให้ฉันฟังในวันนี้ไหม?",
                     "คุณอยากให้เราแบ่งเวลาไปเจอเพื่อนของแต่ละฝ่าย หรือไปร่วมกิจกรรมครอบครัวบ่อยแค่ไหน?",
-                    "ในวันที่เราเห็นต่างกันมากๆ คุณอยากให้เราหาข้อยุติด้วยวิธีไหน (โหวต, หาคนกลาง, หรือคุยจนกว่าจะเคลียร์)?",
+                    "ในวันที่เราเห็นต่างกันมากๆ คุณอยากให้เราหาข้อยุติด้วยวิธีไหน?",
                     "อะไรคือสิ่งที่ฉันสามารถทำได้เพื่อทำให้คุณมั่นใจในความรักของฉันมากขึ้นกว่าเดิม?",
                     "คุณเคยรู้สึกหึงหวงฉันในสถานการณ์ไหนมากที่สุด? และคุณจัดการความรู้สึกนั้นอย่างไร?",
-                    "นิยามคำว่า \"ความโรแมนติก\" ของคุณคืออะไร? ต้องมีดอกไม้ ดินเนอร์หรู หรือแค่เรื่องเล็กๆ ในชีวิตประจำวัน?",
+                    "นิยามคำว่า \"ความโรแมนติก\" ของคุณคืออะไร? ต้องมีของหรูๆ หรือแค่เรื่องเล็กๆ?",
                     "ถ้าสามารถเปลี่ยนนิสัยของฉันได้ 1 อย่างถ้วน คุณอยากเปลี่ยนอะไรมากที่สุด?",
-                    "คุณคิดว่าเราสองคนพร้อมที่จะใช้ชีวิตอยู่ร่วมบ้านเดียวกัน (Move in together) หรือยัง?",
+                    "คุณคิดว่าเราสองคนพร้อมที่จะใช้ชีวิตอยู่ร่วมบ้านเดียวกัน หรือยัง?",
                     "อะไรคือสิ่งที่ทำให้คุณมั่นใจว่าฉันคือคนที่ใช่สำหรับคุณในตอนนี้?",
                     "คุณกังวลเรื่องความมั่นคงทางการเงินของคู่เราในอนาคตมากน้อยแค่ไหน?",
                     "ทัศนคติทางการเมืองหรือความเชื่อส่วนบุคคลที่ต่างกัน จะเป็นอุปสรรคต่อความรักของเราไหม?",
-                    "คุณชอบให้ฉันแสดงความรักต่อหน้าคนอื่น (PDA - Public Display of Affection) มากน้อยแค่ไหน?",
+                    "คุณชอบให้ฉันแสดงความรักต่อหน้าคนอื่น มากน้อยแค่ไหน?",
                     "บาดแผลจากความรักครั้งเก่าของคุณ มีส่วนไหนที่ฉันต้องระวังไม่ให้ไปสะกิดมันไหม?",
                     "คุณอยากให้เรามีกิจกรรมอะไรที่ทำร่วมกันเป็นประจำทุกสัปดาห์เพื่อเติมความหวานให้กัน?",
                     "ถ้าวันหนึ่งเราแก่ไปด้วยกัน คุณอยากให้เราใช้เวลาวันอาทิตย์ด้วยกันในรูปแบบไหน?",
@@ -488,8 +531,7 @@
                 ]
             },
             would1: {
-                title: "🎈 Would You Rather? (Casual Mode)",
-                desc: "โหมดไลฟ์สไตล์ ทั่วไป ตลก ขำๆ: เหมาะชวนคุยผ่อนคลายความเครียด เลือกข้างสนุกๆ สบายสมอง",
+                title: "Would You Rather? • Casual",
                 questions: [
                     "ระหว่าง \"เที่ยวสไตล์ Backpack ลุยๆ แต่ได้ไปที่อันซีน\" กับ \"นอนโรงแรม 5 ดาวหรูๆ แต่เที่ยวแค่รอบๆ โรงแรม\"",
                     "ระหว่าง \"ติดเกาะร้างกับคนที่เกลียด 1 เดือน\" กับ \"อยู่คนเดียวในห้องมืดๆ ไม่มีอินเทอร์เน็ตเลย 2 สัปดาห์\"",
@@ -519,26 +561,25 @@
                 ]
             },
             would2: {
-                title: "🧠 Would You Rather? (Tricky Mode)",
-                desc: "โหมดจี้ปมเลือกยาก วัดทัศนคติเบื้องลึก: คำถามสมมติสถานการณ์ชวนคิดหนักที่ไม่มีคำตอบไหนถูกหรือผิด",
+                title: "Would You Rather? • Tricky",
                 questions: [
                     "ระหว่าง \"รู้ล่วงหน้าว่าตัวเองจะตายเมื่อไหร่\" กับ \"รู้ล่วงหน้าว่าตัวเองจะตายด้วยสาเหตุอะไร\"",
                     "ระหว่าง \"ประสบความสำเร็จในอาชีพการงานขั้นสุดแต่ต้องอยู่ตัวคนเดียว\" กับ \"มีครอบครัวที่อบอุ่นมากแต่ฐานะการเงินแค่พอมีพอกิน\"",
                     "ระหว่าง \"พูดความจริงทุกอย่างจนคนรอบตัวรับไม่ได้\" กับ \"พูดโกหกเพื่อรักษาน้ำใจคนอื่นไปตลอดชีวิต\"",
                     "ระหว่าง \"รักคนที่เขาไม่รักเรา\" กับ \"ถูกรักโดยคนที่เราไม่ได้รู้สึกอะไรด้วยเลย\"",
-                    "ระหว่าง \"คู่ชีวิตที่เป็นเหมือนกระจกสะท้อน (เหมือนกันทุกอย่าง)\" กับ \"คู่ชีวิตที่เป็นจิ๊กซอว์ (ต่างกันขั้วตรงข้ามแต่เติมเต็ม)\"",
+                    "ระหว่าง \"คู่ชีวิตที่เป็นเหมือนกระจกสะท้อน\" กับ \"คู่ชีวิตที่เป็นจิ๊กซอว์ (ต่างกันขั้วตรงข้ามแต่เติมเต็ม)\"",
                     "ระหว่าง \"ฉลาดที่สุดในโลกแต่ไม่มีใครคบ\" กับ \"เป็นคนธรรมดาๆ ที่มีแต่คนรักและเอ็นดู\"",
                     "ระหว่าง \"ยอมให้อดีตคนรักกลับมาเป็นเพื่อนสนิท\" กับ \"ตัดขาดกันไปเลยแบบไม่มองหน้ากันอีก\"",
                     "ระหว่าง \"แต่งงานสาย/ไม่แต่งเลยแต่การเงินมั่นคงมาก\" กับ \"แต่งงานเร็วตั้งแต่อายุยังน้อยแต่ต้องช่วยกันกัดก้อนเกลือกิน\"",
                     "ระหว่าง \"คนรักทำความผิดกฎหมายร้ายแรงแต่ทำเพื่อปกป้องคุณ\" กับ \"คนรักทำสิ่งที่ถูกต้องตามกฎหมายแต่ทำให้คุณเดือดร้อนขั้นสุด\"",
-                    "ระหว่าง \"ลืมอดีตทั้งหมดของตัวเอง (จำไม่ได้เลยว่าเคยเป็นใคร)\" กับ \"ลืมหน้าและเรื่องราวของทุกคนที่เคยผ่านเข้ามาในชีวิต\"",
+                    "ระหว่าง \"ลืมอดีตทั้งหมดของตัวเอง\" กับ \"ลืมหน้าและเรื่องราวของทุกคนที่เคยผ่านเข้ามาในชีวิต\"",
                     "ระหว่าง \"มีคนรักที่อารมณ์ร้อนแต่ใจดีและเปย์หนัก\" กับ \"มีคนรักที่ใจเย็นมากแต่เย็นชาและไม่ค่อยใส่ใจความรู้สึก\"",
                     "ระหว่าง \"ทำงานที่รักมากแต่ได้เงินเดือนน้อยพอกินไปวันๆ\" กับ \"ทำงานที่เกลียดมากแต่ได้เงินเดือนหลักล้าน\"",
                     "ระหว่าง \"รู้ว่าแฟนแอบเช็คโทรศัพท์ทุกวัน\" กับ \"แฟนไม่เคยสนใจหรือเช็คอะไรเกี่ยวกับคุณเลย\"",
                     "ระหว่าง \"ตายก่อนคนรัก\" กับ \"อยู่ดูคนรักตายจากไปก่อน\"",
                     "ระหว่าง \"มีเพื่อนสนิทแค่คนเดียวที่ยอมตายแทนกันได้\" กับ \"มีเพื่อนฝูงมากมายที่ไปไหนไปกันแต่พึ่งพาเรื่องซีเรียสไม่ได้\"",
                     "ระหว่าง \"สามารถอ่านใจคนรักได้ตลอดเวลา\" กับ \"คนรักสามารถอ่านใจคุณได้ตลอดเวลา\"",
-                    "ระหว่าง \"ถูกลบตัวตนออกไปจากความทรงจำของทุกคนบนโลกเหมือนไม่เคยมีอยู่\" กับ \"ทุกคนจำคุณได้แต่นึกถึงคุณในแง่ลบเสมอ\"",
+                    "ระหว่าง \"ถูกลบตัวตนออกไปจากความทรงจำของทุกคนบนโลก\" กับ \"ทุกคนจำคุณได้แต่นึกถึงคุณในแง่ลบเสมอ\"",
                     "ระหว่าง \"ยอมอยู่กับความจริงที่เจ็บปวดลึกๆ\" กับ \"อยู่กับความสุขที่เกิดจากการหลอกตัวเอง\"",
                     "ระหว่าง \"คนรักมีเวลาให้คุณตลอด 24 ชั่วโมงจนแทบไม่มีพื้นที่ส่วนตัว\" กับ \"คนรักยุ่งมากจนได้เจอกันแค่เดือนละครั้ง\"",
                     "ระหว่าง \"ไม่มีเซ็กส์เลยตลอดชีวิตแต่รักกันหวานชื่น\" กับ \"มีเซ็กส์ที่ยอดเยี่ยมมากแต่ไม่มีความรักความผูกพันให้กันเลย\"",
@@ -551,65 +592,35 @@
             }
         };
 
-        // ข้อมูลสเตจเพื่อมาจัดหมวดใน Step 2
-        const stageConfig = {
-            deeptalk: [
-                { key: 'deep1', label: '🧊 Level 1: First Date / Perspective' },
-                { key: 'deep2', label: '☕ Level 2: Getting Closer / Core Values' },
-                { key: 'deep3', label: '🌙 Level 3: Safe Zone / Vulnerability' },
-                { key: 'deep4', label: '🕯️ Level 4: Deeply in Love / Us & Future' }
-            ],
-            wouldyourather: [
-                { key: 'would1', label: '🎈 Casual Mode (ตลก ขำๆ คลายเครียด)' },
-                { key: 'would2', label: '🧠 Tricky Mode (เลือกยาก วัดใจทัศนคติ)' }
-            ]
-        };
-
         let currentQuestionsList = [];
         let usedQuestionsList = [];
         let currentModeKey = '';
-        let currentMainGroup = ''; // 'deeptalk' หรือ 'wouldyourather'
         let totalInMode = 0;
+        let currentGroup = ''; 
 
-        // สลับไปหน้า Step 2 และเจนปุ่มตามกลุ่มที่เลือก
-        function goToStep2(mainGroup) {
-            currentMainGroup = mainGroup;
-            const optionsContainer = document.getElementById('stage-options');
-            optionsContainer.innerHTML = ''; // Clear เก่า
-
-            // ดึง Configuration ของ Stage มาสร้าง Card ปุ่มกด
-            stageConfig[mainGroup].forEach(stage => {
-                const data = questionBank[stage.key];
-                const card = document.createElement('div');
-                card.className = 'menu-card';
-                card.onclick = () => startGame(stage.key);
-                card.innerHTML = `
-                    <h3>${stage.label}</h3>
-                    <p>${data.desc}</p>
-                `;
-                optionsContainer.appendChild(card);
-            });
-
-            switchScreen('step2-screen');
+        function navigateToStage(group) {
+            currentGroup = group;
+            switchScreen('stage-select-screen');
+            
+            if (group === 'deep') {
+                document.getElementById('stage-title').innerText = "Deep Talk";
+                document.getElementById('deep-stages').style.display = 'grid';
+                document.getElementById('would-stages').style.display = 'none';
+            } else {
+                document.getElementById('stage-title').innerText = "Would You Rather?";
+                document.getElementById('deep-stages').style.display = 'none';
+                document.getElementById('would-stages').style.display = 'grid';
+            }
         }
 
-        function backToStep1() {
-            switchScreen('step1-screen');
-        }
-
-        function backToStep2() {
-            goToStep2(currentMainGroup);
-        }
-
-        // เริ่มต้นเข้าสู้หน้าเกม (Step 3)
         function startGame(key) {
             currentModeKey = key;
             currentQuestionsList = [...questionBank[key].questions];
             usedQuestionsList = [];
             totalInMode = currentQuestionsList.length;
 
-            shuffleArray(currentQuestionsList); // สุ่มคำถามตั้งแต่เริ่ม
-
+            shuffleArray(currentQuestionsList);
+            
             document.getElementById('mood-badge').innerText = questionBank[key].title;
             switchScreen('game-screen');
             nextQuestion();
@@ -617,8 +628,8 @@
 
         function nextQuestion() {
             if (currentQuestionsList.length === 0) {
-                document.getElementById('question-text').innerHTML = "✨ คุณได้คุยครบทุกข้อในหมวดนี้แล้วครับ! เก่งมาก ลองเปลี่ยนระดับเพื่อพูดคุยต่อได้นะ 🥰";
-                document.getElementById('question-counter').innerText = `ผ่านไปแล้ว ${usedQuestionsList.length}/${totalInMode} ข้อ`;
+                document.getElementById('question-text').innerHTML = "พบบทสนทนาครบถ้วนในระดับนี้แล้ว <br>คุณสามารถลองเลือกสเตจอื่นเพื่อแลกเปลี่ยนมุมมองต่อได้ครับ";
+                document.getElementById('question-counter').innerText = `เสร็จสิ้น ${usedQuestionsList.length}/${totalInMode} ข้อ`;
                 return;
             }
 
@@ -627,7 +638,7 @@
 
             const qBox = document.getElementById('question-text');
             qBox.classList.remove('fade-in');
-            void qBox.offsetWidth; // Trigger reflow เพื่อให้แอนิเมชันทำงานใหม่
+            void qBox.offsetWidth; 
             qBox.classList.add('fade-in');
             
             qBox.innerText = currentQ;
@@ -637,27 +648,26 @@
         function skipQuestion() {
             if (usedQuestionsList.length > 0) {
                 const skippedQ = usedQuestionsList.pop();
-                currentQuestionsList.push(skippedQ); // เอาไปวนต่อแถวใหม่
-                shuffleArray(currentQuestionsList); // สุ่มอีกรอบไม่ให้เจอซ้ำทันที
+                currentQuestionsList.push(skippedQ);
+                shuffleArray(currentQuestionsList);
                 nextQuestion();
             }
         }
 
         function resetCurrentCategory() {
-            if (confirm("คุณต้องการรีเซ็ตเพื่อเริ่มต้นเล่นระดับนี้ใหม่ตั้งแต่ข้อแรกใช่ไหม?")) {
+            if (confirm("คุณต้องการเริ่มสุ่มใหม่ตั้งแต่ข้อแรกในระดับนี้ใช่ไหมครับ?")) {
                 startGame(currentModeKey);
             }
         }
 
-        // Helper ฟังก์ชันสลับหน้าจอซ่อน/แสดง
+        function backToMainMenu() { switchScreen('main-menu-screen'); }
+        function backToStageSelect() { navigateToStage(currentGroup); }
+
         function switchScreen(screenId) {
-            document.querySelectorAll('.screen').forEach(screen => {
-                screen.classList.remove('active');
-            });
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(screenId).classList.add('active');
         }
 
-        // ฟังก์ชันสุ่มอาเรย์ (Fisher-Yates Shuffle Algorithm)
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
